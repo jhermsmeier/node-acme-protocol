@@ -9,3 +9,26 @@
 ```sh
 $ npm install acme-protocol
 ```
+
+## Usage
+
+```js
+var ACME = require( 'acme-protocol' )
+```
+
+```js
+var client = new ACME({
+  baseUrl: 'https://acme-staging.api.letsencrypt.org'
+})
+```
+
+```js
+client.getDirectory( function( error, data ) {
+  // data -> {
+  //   'new-authz': 'https://acme-staging.api.letsencrypt.org/acme/new-authz',
+  //   'new-cert': 'https://acme-staging.api.letsencrypt.org/acme/new-cert',
+  //   'new-reg': 'https://acme-staging.api.letsencrypt.org/acme/new-reg',
+  //   'revoke-cert': 'https://acme-staging.api.letsencrypt.org/acme/revoke-cert'
+  // }
+})
+```
