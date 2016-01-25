@@ -1,6 +1,6 @@
 {
   "name": "acme-protocol",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Automatic Certificate Management Environment (ACME) Protocol",
   "license": "MIT",
   "keywords": [
