@@ -2,10 +2,12 @@ var ACME = require( '..' )
 var assert = require( 'assert' )
 var nock = require( 'nock' )
 
+var ACME_API_BASE_URL = 'https://api.example.com'
+
 suite( 'ACME', function() {
 
-  var client = new ACME({
-    baseUrl: 'https://api.example.com',
+  var client = new ACME.Client({
+    baseUrl: ACME_API_BASE_URL,
   })
 
   test( 'throws an error if baseUrl is not a string', function() {
@@ -16,13 +18,13 @@ suite( 'ACME', function() {
   test( '#getDirectory()', function( next ) {
 
     var payload = {
-      'new-authz': 'https://api.example.com/acme/new-authz',
-      'new-cert': 'https://api.example.com/acme/new-cert',
-      'new-reg': 'https://api.example.com/acme/new-reg',
-      'revoke-cert': 'https://api.example.com/acme/revoke-cert'
+      'new-authz': ACME_API_BASE_URL + '/acme/new-authz',
+      'new-cert': ACME_API_BASE_URL + '/acme/new-cert',
+      'new-reg': ACME_API_BASE_URL + '/acme/new-reg',
+      'revoke-cert': ACME_API_BASE_URL + '/acme/revoke-cert'
     }
 
-    nock( 'https://api.example.com' )
+    nock( ACME_API_BASE_URL )
       .get( '/directory' )
       .reply( 200, payload )
 
