@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
 [![build status](https://img.shields.io/travis/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-acme-protocol)
 
-Automatic Certificate Management Environment (ACME) Protocol
+[Automatic Certificate Management Environment (ACME) Protocol](https://github.com/ietf-wg-acme/acme/)
 
 ## Install via [npm](https://npmjs.com)
 
