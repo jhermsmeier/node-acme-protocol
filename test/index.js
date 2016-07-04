@@ -9,8 +9,8 @@ suite( 'ACME', function() {
   })
 
   test( 'throws an error if baseUrl is not a string', function() {
-    assert.throws( function() { new ACME({ baseUrl: 42 }) })
-    assert.throws( function() { new ACME({ baseUrl: {} }) })
+    assert.throws( function() { new ACME.Client({ baseUrl: 42 }) })
+    assert.throws( function() { new ACME.Client({ baseUrl: {} }) })
   })
 
   test( '#getDirectory()', function( next ) {
