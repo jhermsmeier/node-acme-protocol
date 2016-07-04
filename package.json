@@ -20,7 +20,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mocha": "~2.3.4"
+    "mocha": "~2.3.4",
+    "nock": "^8.0.0"
   },
   "scripts": {
     "test": "mocha --ui tdd"
