@@ -4,7 +4,8 @@
 [![npm downloads](https://img.shields.io/npm/dm/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
 [![build status](https://img.shields.io/travis/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-acme-protocol)
 
-[Automatic Certificate Management Environment (ACME) Protocol](https://github.com/ietf-wg-acme/acme/)
+This module aims to implement the [Automatic Certificate Management Environment (ACME) Protocol](https://github.com/ietf-wg-acme/acme/),
+with compatibility for both, the currently employed (e.g. by LetsEncrypt), and the currently being specified version.
 
 ## Install via [npm](https://npmjs.com)
 
