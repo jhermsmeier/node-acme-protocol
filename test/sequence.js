@@ -26,12 +26,14 @@ suite( 'ACME Cert Sequence', function() {
   var scope = null
 
   suiteSetup( 'nock', function() {
-    scope = require( 'nock' )( ACME_API_BASE_URL, {
+    var nock = require( 'nock' )
+    scope = nock( ACME_API_BASE_URL, {
       allowUnmocked: true,
     })
   })
 
   suiteSetup( 'generate keypair', function( done ) {
+    this.timeout( 60 * 1000 )
     require( './util/keypair' ).create( function( error, keys ) {
       keyPair = keys
       done( error )
@@ -48,6 +50,10 @@ suite( 'ACME Cert Sequence', function() {
 
   test( 'directory', function( done ) {
 
+    var headers = {
+      'replay-nonce': 'j9SDqC6KPjqyZ5RqCR8iMCBzYXbEXNFMFeWfQM_ayaY',
+    }
+
     var payload = {
       'new-authz': URL.resolve( ACME_API_BASE_URL, '/acme/new-authz' ),
       'new-cert': URL.resolve( ACME_API_BASE_URL, '/acme/new-cert' ),
@@ -60,8 +66,8 @@ suite( 'ACME Cert Sequence', function() {
       },
     }
 
-    scope.get( '/directory' )
-      .reply( 200, payload )
+    scope && scope.get( '/directory' )
+      .reply( 200, payload, headers )
 
     client.configure( function( error, directory ) {
       assert.ifError( error )
@@ -72,20 +78,69 @@ suite( 'ACME Cert Sequence', function() {
 
   })
 
-  test.skip( 'register', function( done ) {
+  test( 'register', function( done ) {
 
-    var payload = null // = reg
-    var expectedPostData = null
+    var headers = {
+      'replay-nonce': 'r84ft2QNfb9TVlNDdYXnkclV_yCcsq6UqYybehBziwM',
+      'location': ACME_API_BASE_URL + '/acme/reg/246840',
+    }
+
+    var payload = {
+      id: 246840,
+      key: {
+        kty: 'RSA',
+        n: 'oL9U7lsMfBGZiFO_NmvTbPlPaMgMfg9iuxO2IkgKrJbKVtrGvfzNCOMIaO_wAx8AIf3-tegeaEWWV6FyO6haW1zPhKovVAYyXQKof8CKvueooTie46d0JAHirdAGWn2BWCQKQ-GlFqqMx2ou1BHv9MxfGKaT9CjT8cIROl1ptag3kdUH5ZsjhGmdg_TNXeu4wtiYVf0JG9nWfZncX4Dgv6IpSCoQiGf6FIE_q0jaUhpdBdQ6HEL_s6O3L45FFYvGfAuiciuKVZugR3hXCUJ26NmShMKfdu5qUKPQ02-IQAFGncnMNOVPeDhkLMMIaNerGCsjVz1l_TjXOSTW-h1paw',
+        e: 'AQAB'
+      },
+      contact: [ 'mailto:cert-admin@example.com' ],
+      initialIp: '217.246.162.70',
+      createdAt: '2016-07-05T22:28:50.541576377Z'
+    }
+
+    var expectedPostData = '{"payload":"eyJyZXNvdXJjZSI6Im5ldy1yZWciLCJjb250YWN0IjpbIm1haWx0bzpjZXJ0LWFkbWluQGV4YW1wbGUuY29tIl19","protected":"eyJhbGciOiJSUzI1NiIsImp3ayI6eyJrdHkiOiJSU0EiLCJuIjoib0w5VTdsc01mQkdaaUZPX05tdlRiUGxQYU1nTWZnOWl1eE8ySWtnS3JKYktWdHJHdmZ6TkNPTUlhT193QXg4QUlmMy10ZWdlYUVXV1Y2RnlPNmhhVzF6UGhLb3ZWQVl5WFFLb2Y4Q0t2dWVvb1RpZTQ2ZDBKQUhpcmRBR1duMkJXQ1FLUS1HbEZxcU14Mm91MUJIdjlNeGZHS2FUOUNqVDhjSVJPbDFwdGFnM2tkVUg1WnNqaEdtZGdfVE5YZXU0d3RpWVZmMEpHOW5XZlpuY1g0RGd2NklwU0NvUWlHZjZGSUVfcTBqYVVocGRCZFE2SEVMX3M2TzNMNDVGRll2R2ZBdWljaXVLVlp1Z1IzaFhDVUoyNk5tU2hNS2ZkdTVxVUtQUTAyLUlRQUZHbmNuTU5PVlBlRGhrTE1NSWFOZXJHQ3NqVnoxbF9UalhPU1RXLWgxcGF3IiwiZSI6IkFRQUIifSwibm9uY2UiOiJqOVNEcUM2S1BqcXlaNVJxQ1I4aU1DQnpZWGJFWE5GTUZlV2ZRTV9heWFZIiwidHlwIjoiSldTIn0","header":{"alg":"RS256","jwk":{"kty":"RSA","n":"oL9U7lsMfBGZiFO_NmvTbPlPaMgMfg9iuxO2IkgKrJbKVtrGvfzNCOMIaO_wAx8AIf3-tegeaEWWV6FyO6haW1zPhKovVAYyXQKof8CKvueooTie46d0JAHirdAGWn2BWCQKQ-GlFqqMx2ou1BHv9MxfGKaT9CjT8cIROl1ptag3kdUH5ZsjhGmdg_TNXeu4wtiYVf0JG9nWfZncX4Dgv6IpSCoQiGf6FIE_q0jaUhpdBdQ6HEL_s6O3L45FFYvGfAuiciuKVZugR3hXCUJ26NmShMKfdu5qUKPQ02-IQAFGncnMNOVPeDhkLMMIaNerGCsjVz1l_TjXOSTW-h1paw","e":"AQAB"},"typ":"JWS"},"signature":"PilLEH8oeTIIMiQkdCnjA8ju5DbCJM4wtjnLF5yzV67uaWEaZgzMMm82uynQF4HbV1yOse6iz75ntJdjOH0xVsFEd-0UJup_byX_52UJ4ZOi_GUZFohbWiNLSv_IIrQqNEbuCMKWyWzarYPYy0mFA0zyjyLJU8_Ethcp_oKA_jHRJrW5HEYtJZ771rxbHQOyVSlcRWxi0GiexsvhP6Q8A9yMcxpO_FbOlI1Cz21yLO0ni7i5GrGbSL4ru9TsA2QOpflV6m3fDUeL_nRLK35H0cuPTJunvi8aFv3NHi3_9Vc7LEFHH9ZsxnJZygy6Wjc6ApPzZEZJ_DYiv7_zJX9Z5A"}'
     var contact = [
-      'mailto:cert-admin@example.com',
-      'tel:+12025551212'
+      'mailto:cert-admin@example.com'
     ]
 
-    scope.post( '/acme/new-reg', expectedPostData )
-      .reply( 201, payload )
+    scope && scope.post( '/acme/new-reg', expectedPostData )
+      .reply( 201, payload, headers )
 
-    client.register( contact, function( error, account ) {
+    client.register( contact, function( error, registration ) {
+      assert.strictEqual( registration, headers.location )
       done( error )
+    })
+
+  })
+
+  test( 'register again with same key', function( done ) {
+
+    var headers = {
+      'content-type': 'application/problem+json',
+      'replay-nonce': 'yJsGfcnLUMCTdsKGEv2D8jgTCH8RYYqIiJtSMdlu94Y',
+      'location': ACME_API_BASE_URL + '/acme/reg/246840',
+    }
+
+    var payload = {
+      type: 'urn:acme:error:malformed',
+      detail: 'Registration key is already in use',
+      status: 409
+    }
+
+    var expectedPostData = '{"payload":"eyJyZXNvdXJjZSI6Im5ldy1yZWciLCJjb250YWN0IjpbIm1haWx0bzpjZXJ0LWFkbWluQGV4YW1wbGUuY29tIl19","protected":"eyJhbGciOiJSUzI1NiIsImp3ayI6eyJrdHkiOiJSU0EiLCJuIjoib0w5VTdsc01mQkdaaUZPX05tdlRiUGxQYU1nTWZnOWl1eE8ySWtnS3JKYktWdHJHdmZ6TkNPTUlhT193QXg4QUlmMy10ZWdlYUVXV1Y2RnlPNmhhVzF6UGhLb3ZWQVl5WFFLb2Y4Q0t2dWVvb1RpZTQ2ZDBKQUhpcmRBR1duMkJXQ1FLUS1HbEZxcU14Mm91MUJIdjlNeGZHS2FUOUNqVDhjSVJPbDFwdGFnM2tkVUg1WnNqaEdtZGdfVE5YZXU0d3RpWVZmMEpHOW5XZlpuY1g0RGd2NklwU0NvUWlHZjZGSUVfcTBqYVVocGRCZFE2SEVMX3M2TzNMNDVGRll2R2ZBdWljaXVLVlp1Z1IzaFhDVUoyNk5tU2hNS2ZkdTVxVUtQUTAyLUlRQUZHbmNuTU5PVlBlRGhrTE1NSWFOZXJHQ3NqVnoxbF9UalhPU1RXLWgxcGF3IiwiZSI6IkFRQUIifSwibm9uY2UiOiJyODRmdDJRTmZiOVRWbE5EZFlYbmtjbFZfeUNjc3E2VXFZeWJlaEJ6aXdNIiwidHlwIjoiSldTIn0","header":{"alg":"RS256","jwk":{"kty":"RSA","n":"oL9U7lsMfBGZiFO_NmvTbPlPaMgMfg9iuxO2IkgKrJbKVtrGvfzNCOMIaO_wAx8AIf3-tegeaEWWV6FyO6haW1zPhKovVAYyXQKof8CKvueooTie46d0JAHirdAGWn2BWCQKQ-GlFqqMx2ou1BHv9MxfGKaT9CjT8cIROl1ptag3kdUH5ZsjhGmdg_TNXeu4wtiYVf0JG9nWfZncX4Dgv6IpSCoQiGf6FIE_q0jaUhpdBdQ6HEL_s6O3L45FFYvGfAuiciuKVZugR3hXCUJ26NmShMKfdu5qUKPQ02-IQAFGncnMNOVPeDhkLMMIaNerGCsjVz1l_TjXOSTW-h1paw","e":"AQAB"},"typ":"JWS"},"signature":"e0TAH4BUwMIHJEzluxFTgFi5wzcDppkhVRXkwZ06C42fhbCvnQh0mL5sOK2qWi887IBDg3D5c1WtV62Rr82y0f3hq1J06Th6HTF-soo-czta0GmxfbszL6BgVHqxhjr5aQPzRnHNYUTcsyetTuo4v3h95Rtq3DU1QQC91qx2e_vaLAzpoRUs_423RjVwV8XM3aBr567XuI0VOPS_eeWDFg0V0BCkCuIB2RvVe9ASNXd1IwK6Ozehmc114wZCJv-KpNO43Ni-BrgotlNDIuz8ffr5R9R8CaGWr3MDj8Up9XjZ5aHigqwjgwNZvauCKdkvyq-Cllh4VgnIjAcqdHzpyA"}'
+    var contact = [
+      'mailto:cert-admin@example.com'
+    ]
+
+    scope && scope.post( '/acme/new-reg', expectedPostData )
+      .reply( 409, payload, headers )
+
+    client.register( contact, function( error, registration ) {
+      assert.ok( error instanceof Error )
+      assert.strictEqual( error.status, payload.status )
+      assert.strictEqual( error.type, payload.type )
+      assert.strictEqual( error.detail, payload.detail )
+      assert.strictEqual( registration, headers.location )
+      done()
     })
 
   })
@@ -95,7 +150,7 @@ suite( 'ACME Cert Sequence', function() {
     var payload = null
     var expectedPostData = null
 
-    scope.post( '/acme/new-authz', expectedPostData )
+    scope && scope.post( '/acme/new-authz', expectedPostData )
       .reply( 201, payload )
 
     client.getChallenge( function( error, challenge ) {
@@ -109,7 +164,7 @@ suite( 'ACME Cert Sequence', function() {
     var payload = null
     var expectedPostData = null
 
-    scope.post( '/acme/challenge', expectedPostData )
+    scope && scope.post( '/acme/challenge', expectedPostData )
       .reply( 201, payload )
 
     client.answerChallenge( function( error, result ) {
@@ -122,7 +177,7 @@ suite( 'ACME Cert Sequence', function() {
 
     var payload = null
 
-    scope.get( '/acme/authz' )
+    scope && scope.get( '/acme/authz' )
       .reply( 200, payload )
 
     client.getStatus( function( error, authorization ) {
@@ -136,7 +191,7 @@ suite( 'ACME Cert Sequence', function() {
     var payload = null
     var expectedPostData = null
 
-    scope.post( '/acme/new-cert', expectedPostData )
+    scope && scope.post( '/acme/new-cert', expectedPostData )
       .reply( 201, payload )
 
     client.requestCert( function( error, cert ) {
@@ -149,7 +204,7 @@ suite( 'ACME Cert Sequence', function() {
 
     var payload = null
 
-    scope.get( '/acme/cert' )
+    scope && scope.get( '/acme/cert' )
       .reply( 200, payload )
 
     client.getStatus( function( error, cert ) {
