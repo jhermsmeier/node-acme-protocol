@@ -3,6 +3,7 @@
 [![npm license](https://img.shields.io/npm/l/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
 [![npm downloads](https://img.shields.io/npm/dm/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
 [![Travis CI status](https://img.shields.io/travis/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-acme-protocol)
+[![AppVeyor CI status](https://img.shields.io/appveyor/ci/jhermsmeier/node-acme-protocol/master.svg?style=flat-square)]()
 [![Dependency Status](https://dependencyci.com/github/jhermsmeier/node-acme-protocol/badge?style=flat-square)](https://dependencyci.com/github/jhermsmeier/node-acme-protocol)
 [![Code Climate](https://img.shields.io/codeclimate/github/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://codeclimate.com/github/jhermsmeier/node-acme-protocol)
 
