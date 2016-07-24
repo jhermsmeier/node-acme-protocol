@@ -175,7 +175,9 @@ suite( 'ACME Cert Sequence', function() {
       },
     }
 
-    scope && scope.post( client.registrationUrl, expectedPostData )
+    var location = URL.parse( client.registrationUrl ).pathname
+
+    scope && scope.post( location, expectedPostData )
       .reply( 202, payload )
 
     var registration = {
