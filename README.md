@@ -2,7 +2,9 @@
 [![npm](https://img.shields.io/npm/v/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
 [![npm license](https://img.shields.io/npm/l/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
 [![npm downloads](https://img.shields.io/npm/dm/acme-protocol.svg?style=flat-square)](https://npmjs.com/package/acme-protocol)
-[![build status](https://img.shields.io/travis/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-acme-protocol)
+[![Travis CI status](https://img.shields.io/travis/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-acme-protocol)
+[![Dependency Status](https://dependencyci.com/github/jhermsmeier/node-acme-protocol/badge?style=flat-square)](https://dependencyci.com/github/jhermsmeier/node-acme-protocol)
+[![Code Climate](https://img.shields.io/codeclimate/github/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://codeclimate.com/github/jhermsmeier/node-acme-protocol)
 
 This module aims to implement the [Automatic Certificate Management Environment (ACME) Protocol](https://github.com/ietf-wg-acme/acme/),
 with compatibility for both, the currently employed (e.g. by LetsEncrypt), and the currently being specified version.
