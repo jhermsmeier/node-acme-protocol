@@ -145,6 +145,56 @@ suite( 'ACME Cert Sequence', function() {
 
   })
 
+  test( 'update registration w/ agreement', function( done ) {
+
+    var payload = {
+      id: 246840,
+      key: {
+        kty: 'RSA',
+        n: 'oL9U7lsMfBGZiFO_NmvTbPlPaMgMfg9iuxO2IkgKrJbKVtrGvfzNCOMIaO_wAx8AIf3-tegeaEWWV6FyO6haW1zPhKovVAYyXQKof8CKvueooTie46d0JAHirdAGWn2BWCQKQ-GlFqqMx2ou1BHv9MxfGKaT9CjT8cIROl1ptag3kdUH5ZsjhGmdg_TNXeu4wtiYVf0JG9nWfZncX4Dgv6IpSCoQiGf6FIE_q0jaUhpdBdQ6HEL_s6O3L45FFYvGfAuiciuKVZugR3hXCUJ26NmShMKfdu5qUKPQ02-IQAFGncnMNOVPeDhkLMMIaNerGCsjVz1l_TjXOSTW-h1paw',
+        e: 'AQAB'
+      },
+      contact: [ 'mailto:cert-admin@example.com' ],
+      agreement: 'https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf',
+      initialIp: '217.246.162.70',
+      createdAt: '2016-07-05T22:28:50Z'
+    }
+
+    var expectedPostData = {
+      payload: 'eyJyZXNvdXJjZSI6InJlZyIsImNvbnRhY3QiOlsibWFpbHRvOmNlcnQtYWRtaW5AZXhhbXBsZS5jb20iXSwiYWdyZWVtZW50IjoiaHR0cHM6Ly9sZXRzZW5jcnlwdC5vcmcvZG9jdW1lbnRzL0xFLVNBLXYxLjAuMS1KdWx5LTI3LTIwMTUucGRmIiwia2V5Ijp7Imt0eSI6IlJTQSIsIm4iOiJvTDlVN2xzTWZCR1ppRk9fTm12VGJQbFBhTWdNZmc5aXV4TzJJa2dLckpiS1Z0ckd2ZnpOQ09NSWFPX3dBeDhBSWYzLXRlZ2VhRVdXVjZGeU82aGFXMXpQaEtvdlZBWXlYUUtvZjhDS3Z1ZW9vVGllNDZkMEpBSGlyZEFHV24yQldDUUtRLUdsRnFxTXgyb3UxQkh2OU14ZkdLYVQ5Q2pUOGNJUk9sMXB0YWcza2RVSDVac2poR21kZ19UTlhldTR3dGlZVmYwSkc5bldmWm5jWDREZ3Y2SXBTQ29RaUdmNkZJRV9xMGphVWhwZEJkUTZIRUxfczZPM0w0NUZGWXZHZkF1aWNpdUtWWnVnUjNoWENVSjI2Tm1TaE1LZmR1NXFVS1BRMDItSVFBRkduY25NTk9WUGVEaGtMTU1JYU5lckdDc2pWejFsX1RqWE9TVFctaDFwYXciLCJlIjoiQVFBQiJ9fQ',
+      protected: 'eyJhbGciOiJSUzI1NiIsImp3ayI6eyJrdHkiOiJSU0EiLCJuIjoib0w5VTdsc01mQkdaaUZPX05tdlRiUGxQYU1nTWZnOWl1eE8ySWtnS3JKYktWdHJHdmZ6TkNPTUlhT193QXg4QUlmMy10ZWdlYUVXV1Y2RnlPNmhhVzF6UGhLb3ZWQVl5WFFLb2Y4Q0t2dWVvb1RpZTQ2ZDBKQUhpcmRBR1duMkJXQ1FLUS1HbEZxcU14Mm91MUJIdjlNeGZHS2FUOUNqVDhjSVJPbDFwdGFnM2tkVUg1WnNqaEdtZGdfVE5YZXU0d3RpWVZmMEpHOW5XZlpuY1g0RGd2NklwU0NvUWlHZjZGSUVfcTBqYVVocGRCZFE2SEVMX3M2TzNMNDVGRll2R2ZBdWljaXVLVlp1Z1IzaFhDVUoyNk5tU2hNS2ZkdTVxVUtQUTAyLUlRQUZHbmNuTU5PVlBlRGhrTE1NSWFOZXJHQ3NqVnoxbF9UalhPU1RXLWgxcGF3IiwiZSI6IkFRQUIifSwibm9uY2UiOiJ4b1VKVnpqSlRxNDd2dFhNNm9lOVV5N0E5Z2xsS2dfY3pIdDhpektCaVZNIiwidHlwIjoiSldTIn0',
+      signature: 'UUsJr6lkGLOloyXELW4-NrjFpYa0186nXdBP6bnKAN06R9v-yU6OMWjIp-J-WSTsnwqBnzusUtXz4609lV4X3XklaYtdrZY-gwEmNu5mlzaKe_b3QlJ9o1BDw-2dSQ7WABFCkanMGkwlmPchXXt8IEUHamMxhS7AVIfb1KyAs3E0pneUzbFfGZja5nAVxk5d8at5IrAsQSD1x74RHsmc9Nijmr6GO4CzFOCEGQRjh_qlh-nzCYfgR57VurFIAl2PEAPQ7b2ZqyvzlWkdTpo2is93OnkI16Iu-_2ArLLFN6YZGFeD3u828aSMuCYWhnPrnsmlivKGqLzx4ZjjCDJ04A',
+      header: {
+        alg: 'RS256',
+        jwk: {
+            kty: 'RSA',
+            n: 'oL9U7lsMfBGZiFO_NmvTbPlPaMgMfg9iuxO2IkgKrJbKVtrGvfzNCOMIaO_wAx8AIf3-tegeaEWWV6FyO6haW1zPhKovVAYyXQKof8CKvueooTie46d0JAHirdAGWn2BWCQKQ-GlFqqMx2ou1BHv9MxfGKaT9CjT8cIROl1ptag3kdUH5ZsjhGmdg_TNXeu4wtiYVf0JG9nWfZncX4Dgv6IpSCoQiGf6FIE_q0jaUhpdBdQ6HEL_s6O3L45FFYvGfAuiciuKVZugR3hXCUJ26NmShMKfdu5qUKPQ02-IQAFGncnMNOVPeDhkLMMIaNerGCsjVz1l_TjXOSTW-h1paw',
+            e: 'AQAB'
+          },
+        typ: 'JWS'
+      },
+    }
+
+    scope && scope.post( client.registrationUrl, expectedPostData )
+      .reply( 202, payload )
+
+    var registration = {
+      resource: ACME.REGISTRATION,
+      contact: client.registration.contact.slice(),
+      agreement: 'https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf',
+    }
+
+    // TODO:
+    // var responseHeaders = {
+    //   link: '<https://acme-staging.api.letsencrypt.org/acme/new-authz>;rel="next", <https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf>;rel="terms-of-service"',
+    // }
+
+    client.updateRegistration( registration, function( error, data ) {
+      done( error )
+    })
+
+  })
+
   test.skip( 'request challenge', function( done ) {
 
     var payload = null
