@@ -175,9 +175,7 @@ suite( 'ACME Cert Sequence', function() {
       signature: 'fF0GGXt9TSkJRdujMtIbdU0UnTov0sZrVM6D4RBtu2KDvMwX2wAmh4596ycZKIDGS5PkTU2SfjPJLoK-5KKqaFQ_nHr0jr1OB1K7LaKhsZ5lAphC9Z2DuU1Ttr4aaMjeulUhzLcVP8hwVeflH1AOoenf5aTKP91LtxQDq2ZI6wtFMNlnBc0LQ_T19_-oHGd2sPAQp2GzN3QfZJ7zFoq51WNaow4ueOZTxtScAwFgAm9j52OlAjgGW_UWB1sORmpH4znQnjyXWMSAXda0698EbMRecQ-5WMDvquZymi-Nc9Iqinbo9KRiTmiRdWJszx3TE0FwS75jbqOId-iIpfBJPw'
     })
 
-    var location = URL.parse( client.registrationUrl ).pathname
-
-    scope && scope.post( location, expectedPostData )
+    scope && scope.post( client.registrationUrl, expectedPostData )
       .reply( 202, payload )
 
     var registration = {
@@ -185,11 +183,6 @@ suite( 'ACME Cert Sequence', function() {
       contact: client.registration.contact.slice(),
       agreement: 'https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf',
     }
-
-    // TODO:
-    // var responseHeaders = {
-    //   link: '<https://acme-staging.api.letsencrypt.org/acme/new-authz>;rel="next", <https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf>;rel="terms-of-service"',
-    // }
 
     client.updateRegistration( registration, function( error, data ) {
       done( error )
