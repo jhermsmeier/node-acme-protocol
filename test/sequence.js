@@ -200,6 +200,25 @@ suite( 'ACME Cert Sequence', function() {
 
   })
 
+  test.skip( 'renew agreement when TOS change/update', function() {
+
+    // Old TOS link:
+    var responseHeaders = {
+      link: '<https://acme-staging.api.letsencrypt.org/acme/new-authz>;rel="next", <https://letsencrypt.org/documents/LE-SA-v1.0.1-July-27-2015.pdf>;rel="terms-of-service"',
+    }
+    // New TOS link:
+    var responseHeaders = {
+      link: '<https://acme-staging.api.letsencrypt.org/acme/new-authz>;rel="next", <https://letsencrypt.org/documents/LE-SA-v1.1.1-August-1-2016.pdf>;rel="terms-of-service"',
+    }
+
+    var payload = {}
+    var expectedPostData = {}
+
+    scope && scope.post( client.registrationUrl, expectedPostData )
+      .reply( 200, payload )
+
+  })
+
   test.skip( 'request challenge', function( done ) {
 
     var payload = null
