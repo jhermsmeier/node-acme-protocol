@@ -2,6 +2,9 @@ var ACME = require( '..' )
 var nock = require( 'nock' )
 var assert = require( 'assert' )
 var URL = require( 'url' )
+var setBlocking = require( 'set-blocking' )
+
+setBlocking( true )
 
 var ACME_API_BASE_URL = 'https://api.example.com'
 
