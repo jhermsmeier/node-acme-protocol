@@ -1,4 +1,5 @@
 var ACME = require( '..' )
+var nock = require( 'nock' )
 var assert = require( 'assert' )
 var URL = require( 'url' )
 
@@ -26,7 +27,6 @@ suite( 'ACME Cert Sequence', function() {
   var scope = null
 
   suiteSetup( 'nock', function() {
-    var nock = require( 'nock' )
     scope = nock( ACME_API_BASE_URL, {
       allowUnmocked: true,
     })
@@ -46,6 +46,16 @@ suite( 'ACME Cert Sequence', function() {
       privateKey: keyPair.private,
       publicKey: keyPair.public,
     })
+  })
+
+  teardown( 'http requests', function( done ) {
+    var pending = scope.pendingMocks()
+    if( pending && pending.length ) {
+      nock.cleanAll()
+      done( new Error( 'Pending HTTP requests: \n' + pending.join( '\n' ) ) )
+    } else {
+      done()
+    }
   })
 
   test( 'directory', function( done ) {
