@@ -92,3 +92,47 @@ client.updateRegistration( registration, function( error, registration ) {
   }
 })
 ```
+
+```js
+// Create an Authorization Resource
+var auth = {
+  resource: ACME.NEW_AUTHORIZATION,
+  identifier: {
+    type: 'dns',
+    value: 'example.com'
+  },
+}
+
+// Request a new authorization
+client.newAuthorization( auth, function( error, authorization ) {
+  authorization == {
+    identifier: {
+      type: 'dns',
+      value: 'example.com'
+    },
+    status: 'pending',
+    expires: '2016-08-23T17:01:04.813031251Z',
+    challenges: [
+      {
+        type: 'dns-01',
+        status: 'pending',
+        uri: 'https://acme-staging.api.letsencrypt.org/acme/challenge/FoNKbCvpWIeWZ1zPag2Y9_RoYS1p_nfp12IGx2HE444/10741622',
+        token: 'MCb7GlKjWtYpFiediI1Lxl2eYT1Idswkv6KcoLIu7Eg'
+      },
+      {
+        type: 'tls-sni-01',
+        status: 'pending',
+        uri: 'https://acme-staging.api.letsencrypt.org/acme/challenge/FoNKbCvpWIeWZ1zPag2Y9_RoYS1p_nfp12IGx2HE444/10741623',
+        token: 'q3pTKDKJiqRF9HRYTTiqK6grKmFFNgXXYCH_Ar61IpY'
+      },
+      {
+        type: 'http-01',
+        status: 'pending',
+        uri: 'https://acme-staging.api.letsencrypt.org/acme/challenge/FoNKbCvpWIeWZ1zPag2Y9_RoYS1p_nfp12IGx2HE444/10741624',
+        token: 'gpjesS8JfKGwBx5X6T7RDycRPM9Mxj32xuirCpCbhGU'
+      }
+    ],
+    combinations: [ [ 1 ], [ 0 ], [ 2 ] ]
+  }
+})
+```
