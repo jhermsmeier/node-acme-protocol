@@ -1,8 +1,8 @@
 {
   "name": "acme-protocol",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Automatic Certificate Management Environment (ACME) Protocol",
-  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "license": "MIT",
   "keywords": [
     "acme",
