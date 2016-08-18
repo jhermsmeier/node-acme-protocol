@@ -1,4 +1,5 @@
 .*
 *.yml
+*.md
 test
 examples
