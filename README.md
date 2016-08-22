@@ -5,6 +5,7 @@
 [![Travis CI status](https://img.shields.io/travis/jhermsmeier/node-acme-protocol.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-acme-protocol)
 [![AppVeyor CI status](https://img.shields.io/appveyor/ci/jhermsmeier/node-acme-protocol/master.svg?style=flat-square)](https://ci.appveyor.com/project/jhermsmeier/node-acme-protocol)
 [![Dependency Status](https://dependencyci.com/github/jhermsmeier/node-acme-protocol/badge?style=flat-square)](https://dependencyci.com/github/jhermsmeier/node-acme-protocol)
+[![Code Quality Grade](https://img.shields.io/codacy/grade/890bc62ea4b240f6be8d041dc0cbd1f6/master.svg?style=flat-square&maxAge=2592000)](https://www.codacy.com/app/jhermsmeier/node-acme-protocol)
 
 This module aims to implement the [Automatic Certificate Management Environment (ACME) Protocol](https://github.com/ietf-wg-acme/acme/),
 with compatibility for both, the currently employed (e.g. by LetsEncrypt), and the currently being specified version.
