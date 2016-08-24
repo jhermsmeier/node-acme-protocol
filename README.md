@@ -8,7 +8,7 @@
 [![Code Quality Grade](https://img.shields.io/codacy/grade/890bc62ea4b240f6be8d041dc0cbd1f6/master.svg?style=flat-square&maxAge=2592000)](https://www.codacy.com/app/jhermsmeier/node-acme-protocol)
 
 This module aims to implement the [Automatic Certificate Management Environment (ACME) Protocol](https://github.com/ietf-wg-acme/acme/),
-with compatibility for both, the currently employed (e.g. by LetsEncrypt), and the currently being specified version.
+with compatibility for both, the currently employed (e.g. by [LetsEncrypt](https://letsencrypt.org/)), and the currently being specified version.
 
 ## Install via [npm](https://npmjs.com)
 
@@ -16,11 +16,23 @@ with compatibility for both, the currently employed (e.g. by LetsEncrypt), and t
 $ npm install --save acme-protocol
 ```
 
+## Index
+<!-- MarkdownTOC -->
+
+- [Usage](#usage)
+  - [Creating a Client](#creating-a-client)
+  - [Registering an Account](#registering-an-account)
+  - [Applying for Authorization](#applying-for-authorization)
+
+<!-- /MarkdownTOC -->
+
 ## Usage
 
 ```js
 var ACME = require( 'acme-protocol' )
 ```
+
+### Creating a Client
 
 ```js
 // Create a new ACME protocol client
@@ -46,6 +58,8 @@ client.configure( function( error, directory ) {
   }
 })
 ```
+
+### Registering an Account
 
 ```js
 // Define your contact details
@@ -93,6 +107,8 @@ client.updateRegistration( registration, function( error, registration ) {
   }
 })
 ```
+
+### Applying for Authorization
 
 ```js
 // Create an Authorization Resource
