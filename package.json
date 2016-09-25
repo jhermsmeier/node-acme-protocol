@@ -20,7 +20,7 @@
     "debug": "~2.2.0",
     "json-web-algorithms": "~0.1.0",
     "json-web-key": "~0.3.0",
-    "request": "~2.74.0"
+    "request": "~2.75.0"
   },
   "devDependencies": {
     "mocha": "~3.0.2",
