@@ -1,6 +1,9 @@
 .*
 *.yml
 *.md
+bench
+doc
+example
+scripts
 test
-examples
-docs
+Makefile
