@@ -1,0 +1,28 @@
+{
+  "name": "acme-protocol",
+  "version": "1.0.0",
+  "description": "Automatic Certificate Management Environment (ACME) Protocol",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
+  "license": "MIT",
+  "keywords": [
+    "acme",
+    "letsencrypt",
+    "protocol",
+    "cert",
+    "certificate",
+    "ssl",
+    "tls"
+  ],
+  "main": "lib/acme.js",
+  "scripts": {
+    "test": "control test"
+  },
+  "homepage": "https://github.com/jhermsmeier/node-acme-protocol#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhermsmeier/node-acme-protocol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jhermsmeier/node-acme-protocol/issues"
+  }
+}
